@@ -6,18 +6,26 @@
     <title>Chiao-Hua Chang | Erhu Soloist</title>
     <meta name="description" content="Official portfolio of Chiao-Hua Chang, Erhu Soloist / Vocals / Morin khuur / Educator based in Vienna.">
     
+    <!-- Preconnect to critical domains for faster loading -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.tailwindcss.com">
+    <link rel="preconnect" href="https://i.imgur.com">
+    <link rel="preconnect" href="https://img.youtube.com">
+    
+    <!-- Preload Hero Poster for Instant Visual -->
+    <link rel="preload" as="image" href="https://images.unsplash.com/photo-1511192336575-5a79af67a629?auto=format&fit=crop&q=80&w=1080">
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
     <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@200;300;400;500&family=Noto+Serif+TC:wght@300;500;700&family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
 
     <!-- Leaflet CSS for Map -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
     
-    <!-- Leaflet JS for Map -->
+    <!-- Leaflet JS for Map (Removed defer to fix race condition) -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
     <script>
@@ -194,10 +202,10 @@
 
     <!-- Navigation -->
     <nav class="fixed top-0 w-full z-[60] px-6 py-6 md:px-12 md:py-8 flex justify-between items-center transition-all duration-700" id="navbar">
-        <a href="#hero" class="text-2xl font-serif italic font-bold tracking-tighter text-stone-900 mix-blend-difference hover:opacity-70 transition-opacity z-50">C / C</a>
+        <a href="#hero" id="nav-brand" class="text-2xl font-serif italic font-bold tracking-tighter text-stone-900 mix-blend-difference hover:opacity-70 transition-opacity z-50">C / C</a>
         
         <!-- Desktop Menu -->
-        <div class="hidden md:flex items-center gap-12 text-[11px] uppercase tracking-widest-xl font-medium text-stone-900 mix-blend-difference z-50">
+        <div id="nav-desktop" class="hidden md:flex items-center gap-12 text-[11px] uppercase tracking-widest-xl font-medium text-stone-900 mix-blend-difference z-50">
             <a href="#about" class="nav-link" data-i18n="about">About</a>
             <a href="#works" class="nav-link" data-i18n="works">Works</a>
             <a href="#gallery" class="nav-link" data-i18n="gallery">Gallery</a>
@@ -240,7 +248,8 @@
     <!-- 1. HERO SECTION -->
     <section id="hero" class="relative h-[100dvh] w-full overflow-hidden flex items-center justify-center">
         <div class="hero-video-wrapper">
-            <video autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1511192336575-5a79af67a629?auto=format&fit=crop&q=80&w=2000">
+            <!-- Optimized Video: High priority fetch, auto preload, optimized poster -->
+            <video autoplay muted loop playsinline fetchpriority="high" preload="auto" poster="https://images.unsplash.com/photo-1511192336575-5a79af67a629?auto=format&fit=crop&q=80&w=1080">
                 <source src="https://i.imgur.com/WfajINu.mp4" type="video/mp4">
             </video>
             <div class="absolute inset-0 bg-black/40"></div>
@@ -277,6 +286,7 @@
             <div class="lg:col-span-5 reveal">
                 <div class="relative aspect-[3/4] overflow-hidden group">
                     <img src="https://i.imgur.com/6zgpkDl.jpeg" 
+                         loading="lazy"
                          class="w-full h-full object-cover transition-transform duration-[2s] ease-out group-hover:scale-105 filter sepia-[0.1] contrast-[0.95]" 
                          alt="Chiao-Hua Chang Portrait">
                 </div>
@@ -331,10 +341,10 @@
         </div>
 
         <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 reveal">
-            <!-- Items -->
+            <!-- Items: Using 'sddefault.jpg' for reliability instead of maxresdefault (grey box prevention) -->
             <div class="group cursor-pointer" onclick="openVideo('S0vfVuYH_3Q')">
                 <div class="aspect-video bg-stone-200 relative overflow-hidden mb-6 shadow-sm group-hover:shadow-2xl transition-all duration-700 ease-out">
-                    <img src="https://img.youtube.com/vi/S0vfVuYH_3Q/maxresdefault.jpg" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000">
+                    <img src="https://img.youtube.com/vi/S0vfVuYH_3Q/sddefault.jpg" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000">
                     <div class="absolute inset-0 bg-stone-900/0 group-hover:bg-stone-900/40 transition-colors duration-700 flex items-center justify-center">
                         <div class="w-16 h-16 rounded-full border border-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-700 backdrop-blur-sm bg-white/20">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white" stroke="currentColor" stroke-width="0" class="ml-1"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
@@ -346,7 +356,7 @@
 
             <div class="group cursor-pointer" onclick="openVideo('QNVAUg52Las')">
                 <div class="aspect-video bg-stone-200 relative overflow-hidden mb-6 shadow-sm group-hover:shadow-2xl transition-all duration-700 ease-out">
-                    <img src="https://img.youtube.com/vi/QNVAUg52Las/maxresdefault.jpg" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000">
+                    <img src="https://img.youtube.com/vi/QNVAUg52Las/sddefault.jpg" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000">
                     <div class="absolute inset-0 bg-stone-900/0 group-hover:bg-stone-900/40 transition-colors duration-700 flex items-center justify-center">
                         <div class="w-16 h-16 rounded-full border border-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-700 backdrop-blur-sm bg-white/20">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white" stroke="currentColor" stroke-width="0" class="ml-1"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
@@ -359,7 +369,7 @@
 
             <div class="group cursor-pointer" onclick="openVideo('CZpTLy7Ee-4')">
                 <div class="aspect-video bg-stone-200 relative overflow-hidden mb-6 shadow-sm group-hover:shadow-2xl transition-all duration-700 ease-out">
-                    <img src="https://img.youtube.com/vi/CZpTLy7Ee-4/maxresdefault.jpg" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000">
+                    <img src="https://img.youtube.com/vi/CZpTLy7Ee-4/sddefault.jpg" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000">
                     <div class="absolute inset-0 bg-stone-900/0 group-hover:bg-stone-900/40 transition-colors duration-700 flex items-center justify-center">
                         <div class="w-16 h-16 rounded-full border border-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-700 backdrop-blur-sm bg-white/20">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white" stroke="currentColor" stroke-width="0" class="ml-1"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
@@ -372,7 +382,7 @@
 
              <div class="group cursor-pointer" onclick="openVideo('nWNNEHPSyWs')">
                 <div class="aspect-video bg-stone-200 relative overflow-hidden mb-6 shadow-sm group-hover:shadow-2xl transition-all duration-700 ease-out">
-                    <img src="https://img.youtube.com/vi/nWNNEHPSyWs/maxresdefault.jpg" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000">
+                    <img src="https://img.youtube.com/vi/nWNNEHPSyWs/sddefault.jpg" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000">
                     <div class="absolute inset-0 bg-stone-900/0 group-hover:bg-stone-900/40 transition-colors duration-700 flex items-center justify-center">
                         <div class="w-16 h-16 rounded-full border border-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-700 backdrop-blur-sm bg-white/20">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white" stroke="currentColor" stroke-width="0" class="ml-1"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
@@ -385,7 +395,7 @@
 
             <div class="group cursor-pointer" onclick="openVideo('wH0le3tV3KE')">
                 <div class="aspect-video bg-stone-200 relative overflow-hidden mb-6 shadow-sm group-hover:shadow-2xl transition-all duration-700 ease-out">
-                    <img src="https://img.youtube.com/vi/wH0le3tV3KE/maxresdefault.jpg" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000">
+                    <img src="https://img.youtube.com/vi/wH0le3tV3KE/sddefault.jpg" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000">
                     <div class="absolute inset-0 bg-stone-900/0 group-hover:bg-stone-900/40 transition-colors duration-700 flex items-center justify-center">
                         <div class="w-16 h-16 rounded-full border border-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-700 backdrop-blur-sm bg-white/20">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white" stroke="currentColor" stroke-width="0" class="ml-1"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
@@ -398,7 +408,7 @@
 
             <div class="group cursor-pointer" onclick="openVideo('NG3_-ZmVTQc')">
                 <div class="aspect-video bg-stone-200 relative overflow-hidden mb-6 shadow-sm group-hover:shadow-2xl transition-all duration-700 ease-out">
-                    <img src="https://img.youtube.com/vi/NG3_-ZmVTQc/maxresdefault.jpg" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000">
+                    <img src="https://img.youtube.com/vi/NG3_-ZmVTQc/sddefault.jpg" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000">
                     <div class="absolute inset-0 bg-stone-900/0 group-hover:bg-stone-900/40 transition-colors duration-700 flex items-center justify-center">
                         <div class="w-16 h-16 rounded-full border border-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-700 backdrop-blur-sm bg-white/20">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white" stroke="currentColor" stroke-width="0" class="ml-1"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
@@ -411,7 +421,7 @@
 
              <div class="group cursor-pointer" onclick="openVideo('YN7oQ3Z7eXE')">
                 <div class="aspect-video bg-stone-200 relative overflow-hidden mb-6 shadow-sm group-hover:shadow-2xl transition-all duration-700 ease-out">
-                    <img src="https://img.youtube.com/vi/YN7oQ3Z7eXE/maxresdefault.jpg" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000">
+                    <img src="https://img.youtube.com/vi/YN7oQ3Z7eXE/sddefault.jpg" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000">
                     <div class="absolute inset-0 bg-stone-900/0 group-hover:bg-stone-900/40 transition-colors duration-700 flex items-center justify-center">
                         <div class="w-16 h-16 rounded-full border border-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-700 backdrop-blur-sm bg-white/20">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white" stroke="currentColor" stroke-width="0" class="ml-1"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
@@ -424,7 +434,7 @@
 
             <div class="group cursor-pointer" onclick="openVideo('fr0FB7OPbhE')">
                 <div class="aspect-video bg-stone-200 relative overflow-hidden mb-6 shadow-sm group-hover:shadow-2xl transition-all duration-700 ease-out">
-                    <img src="https://img.youtube.com/vi/fr0FB7OPbhE/maxresdefault.jpg" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000">
+                    <img src="https://img.youtube.com/vi/fr0FB7OPbhE/sddefault.jpg" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000">
                     <div class="absolute inset-0 bg-stone-900/0 group-hover:bg-stone-900/40 transition-colors duration-700 flex items-center justify-center">
                         <div class="w-16 h-16 rounded-full border border-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-700 backdrop-blur-sm bg-white/20">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white" stroke="currentColor" stroke-width="0" class="ml-1"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
@@ -497,7 +507,8 @@
                     
                     <!-- Main Image -->
                     <div class="relative w-full h-full z-10 overflow-hidden shadow-2xl border-l border-stone-800">
-                        <img src="https://i.imgur.com/57eUhrh.jpeg" 
+                        <img src="https://i.imgur.com/vINL5mF.jpeg" 
+                             loading="lazy"
                              class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-[2s] ease-in-out scale-110 group-hover:scale-100" 
                              alt="Erhu Detail">
                         
@@ -555,54 +566,91 @@
         </div>
     </section>
 
-    <!-- 7. EDUCATION -->
+    <!-- 7. EDUCATION (Redesigned Split Layout) -->
     <section id="education" class="py-32 md:py-48 px-6 md:px-12 bg-stone-200/40">
-        <div class="max-w-screen-xl mx-auto">
-            <div class="grid lg:grid-cols-2 gap-24 items-center">
-                <div class="reveal">
-                    <h2 class="text-xs uppercase tracking-widest-xl text-stone-500 mb-6" data-i18n="education">Education</h2>
+        <div class="max-w-screen-2xl mx-auto">
+            
+            <!-- Split Intro: Text & Clean Video -->
+            <div class="grid lg:grid-cols-2 gap-16 items-center mb-24 reveal">
+                
+                <!-- Text Content -->
+                <div>
+                    <h2 class="text-xs uppercase tracking-widest-xl text-stone-500 mb-6 flex items-center gap-3">
+                        <span class="w-6 h-px bg-stone-400"></span> <span data-i18n="education">Education</span>
+                    </h2>
                     <h3 class="text-5xl md:text-6xl font-serif text-stone-900 mb-8" data-i18n="master_erhu">Master the Erhu</h3>
                     <p class="text-stone-600 text-lg font-light leading-relaxed mb-12" data-i18n="edu_desc">
                         Whether you are a complete beginner or a professional musician looking to expand your timbre palette, Chiao-Hua offers a structured yet flexible curriculum.
                     </p>
                     
-                    <div class="flex flex-col gap-6">
-                        <div class="flex items-center gap-6 p-6 bg-[#fbfaf9] border border-stone-200 shadow-sm hover:shadow-xl transition-all duration-700 ease-out">
-                            <span class="text-3xl font-serif italic text-stone-400">01</span>
-                            <div>
-                                <h4 class="text-lg font-serif text-stone-900" data-i18n="trial_session">Trial Session</h4>
-                                <p class="text-xs uppercase tracking-widest text-stone-500">30 Minutes • Assessment</p>
-                            </div>
-                            <div class="ml-auto">
-                                <a href="#contact" class="w-10 h-10 rounded-full border border-stone-300 flex items-center justify-center hover:bg-stone-900 hover:text-white transition-all duration-500">
-                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="flex items-center gap-6 p-6 bg-[#fbfaf9] border border-stone-200 shadow-sm hover:shadow-xl transition-all duration-700 ease-out">
-                            <span class="text-3xl font-serif italic text-stone-400">02</span>
-                            <div>
-                                <h4 class="text-lg font-serif text-stone-900" data-i18n="regular_study">Regular Study</h4>
-                                <p class="text-xs uppercase tracking-widest text-stone-500">60 Minutes • Weekly</p>
-                            </div>
-                            <div class="ml-auto">
-                                <a href="#contact" class="w-10 h-10 rounded-full border border-stone-300 flex items-center justify-center hover:bg-stone-900 hover:text-white transition-all duration-500">
-                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                                </a>
-                            </div>
-                        </div>
+                    <div class="p-8 border-l border-stone-300 bg-stone-100/50">
+                         <p class="text-stone-500 font-serif italic text-xl" data-i18n="edu_quote">"The erhu is the most vocal of instruments; it sings the thoughts you cannot speak."</p>
                     </div>
                 </div>
 
-                <div class="relative h-full min-h-[500px] reveal">
-                    <div class="absolute top-0 right-0 w-4/5 h-4/5 bg-white p-4 shadow-2xl z-10 rotate-3 transition-transform duration-[2s] hover:rotate-1 overflow-hidden rounded-sm transform-gpu">
-                         <video src="https://i.imgur.com/rxZoz5K.mp4" class="w-full h-full object-cover filter sepia-[0.1] rounded-sm" autoplay muted loop playsinline></video>
-                    </div>
-                    <div class="absolute bottom-12 left-4 md:left-12 w-64 h-64 bg-stone-800 p-6 flex flex-col justify-between z-20 -rotate-2 transition-transform duration-[2s] hover:rotate-0 shadow-2xl">
-                         <p class="text-stone-300 font-serif text-lg italic leading-relaxed" data-i18n="edu_quote">"The erhu is the most vocal of instruments; it sings the thoughts you cannot speak."</p>
-                         <span class="text-stone-500 text-[10px] uppercase tracking-widest" data-i18n="philosophy">Student Philosophy</span>
-                    </div>
+                <!-- Clean Embedded Video (No Overlay) -->
+                <div class="relative rounded-lg overflow-hidden shadow-2xl bg-black">
+                    <video src="https://i.imgur.com/rxZoz5K.mp4" class="w-full h-auto object-cover" autoplay muted loop playsinline controls loading="lazy"></video>
                 </div>
+            </div>
+
+            <!-- 3 Levels Cards Grid -->
+            <div class="grid md:grid-cols-3 gap-8 reveal">
+                
+                <!-- Level I Card -->
+                <a href="#contact" class="group relative p-10 bg-[#fbfaf9] border border-stone-200 hover:border-stone-400 hover:shadow-2xl transition-all duration-700 cursor-pointer overflow-hidden flex flex-col h-full hover:-translate-y-2">
+                    <div class="absolute top-0 right-0 p-6 opacity-0 group-hover:opacity-100 transition-opacity translate-x-4 group-hover:translate-x-0 duration-500 text-stone-400">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7l10 10M17 7H7v10"/></svg>
+                    </div>
+                    
+                    <span class="text-xs tracking-widest-xl text-stone-400 uppercase mb-8 block group-hover:text-stone-600 transition-colors border-b border-stone-200 pb-4 w-fit" data-i18n="level_1">Level I</span>
+                    <h4 class="text-3xl font-serif text-stone-900 mb-6 group-hover:italic transition-all" data-i18n="level_1_title">Fundamentals</h4>
+                    <p class="text-stone-500 font-light leading-relaxed mb-12 flex-grow" data-i18n="level_1_desc">
+                        Posture, Jianpu notation, open strings, and basic scales for the absolute beginner. Build a solid foundation.
+                    </p>
+                    
+                    <div class="pt-6 border-t border-stone-200 flex justify-between items-center mt-auto">
+                        <span class="text-[10px] uppercase tracking-widest text-stone-500 group-hover:text-stone-900 transition-colors" data-i18n="inquire">Inquire</span>
+                        <div class="w-8 h-px bg-stone-300 group-hover:w-16 group-hover:bg-stone-900 transition-all duration-500"></div>
+                    </div>
+                </a>
+
+                <!-- Level II Card -->
+                <a href="#contact" class="group relative p-10 bg-[#fbfaf9] border border-stone-200 hover:border-stone-400 hover:shadow-2xl transition-all duration-700 cursor-pointer overflow-hidden flex flex-col h-full hover:-translate-y-2">
+                    <div class="absolute top-0 right-0 p-6 opacity-0 group-hover:opacity-100 transition-opacity translate-x-4 group-hover:translate-x-0 duration-500 text-stone-400">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7l10 10M17 7H7v10"/></svg>
+                    </div>
+                    
+                    <span class="text-xs tracking-widest-xl text-stone-400 uppercase mb-8 block group-hover:text-stone-600 transition-colors border-b border-stone-200 pb-4 w-fit" data-i18n="level_2">Level II</span>
+                    <h4 class="text-3xl font-serif text-stone-900 mb-6 group-hover:italic transition-all" data-i18n="level_2_title">Technique</h4>
+                    <p class="text-stone-500 font-light leading-relaxed mb-12 flex-grow" data-i18n="level_2_desc">
+                        Vibrato, shifting positions, glissando, and traditional folk repertoire development. Refine your voice.
+                    </p>
+                    
+                    <div class="pt-6 border-t border-stone-200 flex justify-between items-center mt-auto">
+                        <span class="text-[10px] uppercase tracking-widest text-stone-500 group-hover:text-stone-900 transition-colors" data-i18n="inquire">Inquire</span>
+                        <div class="w-8 h-px bg-stone-300 group-hover:w-16 group-hover:bg-stone-900 transition-all duration-500"></div>
+                    </div>
+                </a>
+
+                <!-- Level III Card -->
+                <a href="#contact" class="group relative p-10 bg-[#fbfaf9] border border-stone-200 hover:border-stone-400 hover:shadow-2xl transition-all duration-700 cursor-pointer overflow-hidden flex flex-col h-full hover:-translate-y-2">
+                    <div class="absolute top-0 right-0 p-6 opacity-0 group-hover:opacity-100 transition-opacity translate-x-4 group-hover:translate-x-0 duration-500 text-stone-400">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7l10 10M17 7H7v10"/></svg>
+                    </div>
+                    
+                    <span class="text-xs tracking-widest-xl text-stone-400 uppercase mb-8 block group-hover:text-stone-600 transition-colors border-b border-stone-200 pb-4 w-fit" data-i18n="level_3">Level III</span>
+                    <h4 class="text-3xl font-serif text-stone-900 mb-6 group-hover:italic transition-all" data-i18n="level_3_title">Performance</h4>
+                    <p class="text-stone-500 font-light leading-relaxed mb-12 flex-grow" data-i18n="level_3_desc">
+                        Advanced bowing, contemporary improvisation, and stage preparation for professional use. Master the art.
+                    </p>
+                    
+                    <div class="pt-6 border-t border-stone-200 flex justify-between items-center mt-auto">
+                        <span class="text-[10px] uppercase tracking-widest text-stone-500 group-hover:text-stone-900 transition-colors" data-i18n="inquire">Inquire</span>
+                        <div class="w-8 h-px bg-stone-300 group-hover:w-16 group-hover:bg-stone-900 transition-all duration-500"></div>
+                    </div>
+                </a>
+
             </div>
         </div>
     </section>
@@ -696,10 +744,18 @@
                 technique_desc: "No fingerboard allows for deep vibrato and fluid portamento, mimicking the subtleties of human singing.",
                 master_erhu: "Master the Erhu",
                 edu_desc: "Whether you are a complete beginner or a professional musician looking to expand your timbre palette, Chiao-Hua offers a structured yet flexible curriculum.",
-                trial_session: "Trial Session",
-                regular_study: "Regular Study",
                 edu_quote: "\"The erhu is the most vocal of instruments; it sings the thoughts you cannot speak.\"",
-                philosophy: "Student Philosophy",
+                meet_instructor: "Meet the Instructor",
+                level_1: "Level I",
+                level_1_title: "Fundamentals",
+                level_1_desc: "Posture, Jianpu notation, open strings, and basic scales for the absolute beginner. Build a solid foundation.",
+                level_2: "Level II",
+                level_2_title: "Technique",
+                level_2_desc: "Vibrato, shifting positions, glissando, and traditional folk repertoire development. Refine your voice.",
+                level_3: "Level III",
+                level_3_title: "Performance",
+                level_3_desc: "Advanced bowing, contemporary improvisation, and stage preparation for professional use. Master the art.",
+                inquire: "Inquire",
                 booking_title: "Schedule",
                 lets_play: "Let's Play.",
                 inquiries: "Inquiries",
@@ -752,10 +808,18 @@
                 technique_desc: "Kein Griffbrett ermöglicht tiefes Vibrato und fließendes Portamento, das die Feinheiten des menschlichen Gesangs nachahmt.",
                 master_erhu: "Erhu Meistern",
                 edu_desc: "Ob Anfänger oder professioneller Musiker – Chiao-Hua bietet einen strukturierten und dennoch flexiblen Lehrplan.",
-                trial_session: "Probestunde",
-                regular_study: "Regelmäßiger Unterricht",
                 edu_quote: "\"Die Erhu ist das vokalste aller Instrumente; sie singt die Gedanken, die man nicht aussprechen kann.\"",
-                philosophy: "Philosophie",
+                meet_instructor: "Lehrerin kennenlernen",
+                level_1: "Stufe I",
+                level_1_title: "Grundlagen",
+                level_1_desc: "Haltung, Jianpu-Notation, leere Saiten und grundlegende Tonleitern für absolute Anfänger. Ein solides Fundament.",
+                level_2: "Stufe II",
+                level_2_title: "Technik",
+                level_2_desc: "Vibrato, Lagenwechsel, Glissando und traditionelles Volksrepertoire. Verfeinern Sie Ihre Stimme.",
+                level_3: "Stufe III",
+                level_3_title: "Performance",
+                level_3_desc: "Fortgeschrittene Bogentechnik, zeitgenössische Improvisation und Bühnenvorbereitung. Meisterschaft.",
+                inquire: "Anfragen",
                 booking_title: "Termin buchen",
                 lets_play: "Let's Play.",
                 inquiries: "Anfragen",
@@ -808,10 +872,18 @@
                 technique_desc: "无指板设计允许深沉的揉弦和流畅的滑音，模仿人声的细腻。",
                 master_erhu: "掌握二胡",
                 edu_desc: "无论您是初学者还是寻求扩展音色的专业音乐家，巧华都提供结构化且灵活的课程。",
-                trial_session: "试听课",
-                regular_study: "常规课程",
                 edu_quote: "“二胡是最具歌唱性的乐器；它唱出你无法言说的心声。”",
-                philosophy: "教学理念",
+                meet_instructor: "认识导师",
+                level_1: "第一级",
+                level_1_title: "基础",
+                level_1_desc: "姿势、简谱、空弦和基础音阶，适合零基础学者。建立坚实的基础。",
+                level_2: "第二级",
+                level_2_title: "技巧",
+                level_2_desc: "揉弦、换把、滑音和传统民歌 repertoire。雕琢您的声音。",
+                level_3: "第三级",
+                level_3_title: "演奏",
+                level_3_desc: "高级运弓、当代即兴和舞台准备。掌握艺术。",
+                inquire: "咨询",
                 booking_title: "预约课程",
                 lets_play: "合作演出",
                 inquiries: "咨询",
@@ -894,7 +966,10 @@
 
         // Add YouTube videos
         youtubeIds.forEach(id => {
-            items.push({ type: 'youtube', src: id, thumb: `https://img.youtube.com/vi/${id}/mqdefault.jpg` });
+            // OPTIMIZATION: Use hqdefault.jpg (High Quality) instead of mqdefault (Medium)
+            // mqdefault is 320x180 (too blurry), hqdefault is 480x360 (better balance)
+            // maxresdefault often fails, causing grey boxes.
+            items.push({ type: 'youtube', src: id, thumb: `https://img.youtube.com/vi/${id}/hqdefault.jpg` });
         });
 
         // Add Images
@@ -912,7 +987,7 @@
             
             if(item.type === 'youtube') {
                 el.innerHTML = `
-                    <img src="${item.thumb}" class="w-full h-full object-cover group-hover:scale-110 transition-all duration-1000">
+                    <img src="${item.thumb}" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition-all duration-1000">
                     <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
                         <div class="w-8 h-8 rounded-full border border-white/50 bg-black/30 flex items-center justify-center backdrop-blur-sm group-hover:bg-stone-900 group-hover:border-white transition-all duration-500">
                              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="white" stroke="currentColor" stroke-width="0" class="ml-0.5"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
@@ -922,7 +997,7 @@
                 el.onclick = () => openVideo('youtube', item.src);
             } else if (item.type === 'mp4') {
                 el.innerHTML = `
-                    <video src="${item.src}" class="w-full h-full object-cover group-hover:scale-110 transition-all duration-1000" muted loop playsinline onmouseover="this.play()" onmouseout="this.pause();this.currentTime=0;"></video>
+                    <video src="${item.src}" class="w-full h-full object-cover group-hover:scale-110 transition-all duration-1000" muted loop playsinline onmouseover="this.play()" onmouseout="this.pause();this.currentTime=0;" loading="lazy"></video>
                     <div class="absolute inset-0 flex flex-col justify-end p-4 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
                         <p class="text-[10px] uppercase tracking-widest text-white/90 truncate">${item.title}</p>
                     </div>
@@ -931,7 +1006,7 @@
             } else {
                 // REMOVED GRAYSCALE FILTER HERE for luxury look
                 el.innerHTML = `
-                    <img src="${item.thumb}" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-1000">
+                    <img src="${item.thumb}" loading="lazy" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-1000">
                     <div class="absolute inset-0 bg-stone-900/20 group-hover:bg-transparent transition-colors duration-700"></div>
                 `;
             }
@@ -1062,6 +1137,20 @@
                 if(title || desc) {
                     caption.innerHTML = `<span class="block text-white mb-1">${title || ''}</span><span class="text-sm opacity-70">${desc || ''}</span>`;
                 }
+            } else {
+                // If the type is just a string (like from the instructor video), treat it as an ID or file
+                // Here we assume it's an imgur mp4 if it ends in mp4, or youtube ID otherwise. 
+                // For the instructor video specifically, we passed 'rxZoz5K' which is imgur ID.
+                // Let's handle the specific case for the instructor video click
+                if(type === 'rxZoz5K') {
+                    mp4Player.classList.remove('hidden');
+                    mp4Player.src = "https://i.imgur.com/rxZoz5K.mp4";
+                    mp4Player.play();
+                    caption.innerHTML = "Instructor Introduction";
+                } else {
+                     iframe.classList.remove('hidden');
+                     iframe.src = `https://www.youtube.com/embed/${type}?autoplay=1&rel=0&playsinline=1`;
+                }
             }
 
             setTimeout(() => { modal.classList.remove('opacity-0'); }, 50);
@@ -1127,16 +1216,33 @@
 
         // --- NAVBAR SCROLL ---
         const navbar = document.getElementById('navbar');
+        const navBrand = document.getElementById('nav-brand');
+        const navDesktop = document.getElementById('nav-desktop');
+        const navToggle = document.getElementById('menu-toggle');
+
         window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                navbar.classList.add('bg-[#f2f0eb]/90', 'backdrop-blur-md', 'shadow-sm', 'py-4');
+            const isScrolled = window.scrollY > 50;
+            
+            if (isScrolled) {
+                // Scrolled state: Light background, readable dark text
+                navbar.classList.add('bg-[#f2f0eb]/95', 'backdrop-blur-md', 'shadow-sm', 'py-4');
                 navbar.classList.remove('py-8');
+                
+                // Remove blend mode so text stays dark on light background
+                navBrand.classList.remove('mix-blend-difference');
+                navDesktop.classList.remove('mix-blend-difference');
+                navToggle.classList.remove('mix-blend-difference');
             } else {
-                navbar.classList.remove('bg-[#f2f0eb]/90', 'backdrop-blur-md', 'shadow-sm', 'py-4');
+                // Top state: Transparent background, blend mode for video contrast
+                navbar.classList.remove('bg-[#f2f0eb]/95', 'backdrop-blur-md', 'shadow-sm', 'py-4');
                 navbar.classList.add('py-8');
+                
+                // Add blend mode back
+                navBrand.classList.add('mix-blend-difference');
+                navDesktop.classList.add('mix-blend-difference');
+                navToggle.classList.add('mix-blend-difference');
             }
         });
     </script>
 </body>
-
 </html>
