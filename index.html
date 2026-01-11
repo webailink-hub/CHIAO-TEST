@@ -543,7 +543,6 @@
                         
                         <!-- Floating Caption -->
                         <div class="absolute bottom-12 left-8 md:left-12">
-                            <div class="seal mb-4">中国音乐</div>
                             <h2 class="text-6xl font-serif text-white mb-2 tracking-tight" data-i18n="the_erhu">The Erhu</h2>
                             <p class="font-chinese text-2xl text-stone-400 font-light tracking-widest">Two Strings. Eternal Soul.</p>
                         </div>
@@ -976,12 +975,53 @@
         // Existing Image Data
         const imageUrls = [
             {
+                src: 'https://i.imgur.com/kuYmchs.jpeg',
+                title: 'Strączek & Chang',
+                desc: 'Guitar & Morin khuur • 01/06/21 • Stara Łaźnia Moszczenica'
+            },
+            {
                 src: 'https://i.imgur.com/ibq2EmY.jpeg',
                 title: 'Strączek & Chang',
                 desc: 'Guitar & Morin khuur • 01/06/21 • Stara Łaźnia Moszczenica'
             },
+            {
+                src: 'https://i.imgur.com/7aamYM6.jpeg',
+                title: 'ZyrusTraveller / Matrix / NeinBabaNein',
+                desc: '',
+                css: 'object-position: 50% 20%;' 
+            },
+            {
+                src: 'https://i.imgur.com/yy7B5Ei.jpeg',
+                title: 'Der West-Östliche Artmann',
+                desc: 'Tehran'
+            },
+            {
+                src: 'https://i.imgur.com/rt5Hayb.jpeg',
+                title: 'Eldis La Rosa - Colores',
+                desc: 'Sargfabrik • Vienna'
+            },
+            {
+                src: 'https://i.imgur.com/cRFM018.jpeg',
+                title: 'Eldis La Rosa - Colores',
+                desc: 'Sargfabrik • Vienna'
+            },
+            {
+                src: 'https://i.imgur.com/QUqMozB.png',
+                title: 'Orchester der Kulturen',
+                desc: 'Horse racing • Mongolisches Pferderennen'
+            },
+            {
+                src: 'https://i.imgur.com/yKJMsw5.jpeg',
+                title: 'Haag Sommertheater',
+                desc: 'Don Quijote • Eldis La Rosa'
+            },
+            {
+                src: 'https://i.imgur.com/KbmCD77.jpeg',
+                title: 'Budapest Liszt Music Hall',
+                desc: 'Contemporary Music'
+            },
+            // Older images kept as fallback/fillers
             'https://i.imgur.com/Dy3QQIv.jpeg',
-            'https://i.imgur.com/7aamYM6.jpeg',
             'https://i.imgur.com/N8Ql1Qr.jpeg',
             'https://i.imgur.com/CjnpDgT.jpeg',
             'https://i.imgur.com/HjBYIC4.jpeg',
@@ -1009,7 +1049,7 @@
             if (typeof img === 'string') {
                 items.push({ type: 'image', src: img, thumb: img });
             } else {
-                items.push({ type: 'image', src: img.src, thumb: img.src, title: img.title, desc: img.desc });
+                items.push({ type: 'image', src: img.src, thumb: img.src, title: img.title, desc: img.desc, css: img.css });
             }
         });
 
@@ -1040,7 +1080,7 @@
                 `;
                 el.onclick = () => openVideo('mp4', item.src, item.title, item.desc);
             } else {
-                // Image handling with optional caption overlay
+                // Image handling with optional caption overlay and custom styles
                 let captionHtml = '';
                 if (item.title || item.desc) {
                     captionHtml = `
@@ -1051,8 +1091,11 @@
                     `;
                 }
 
+                // Add custom styles (like focal point) to the image tag
+                const styleAttr = item.css ? `style="${item.css}"` : '';
+
                 el.innerHTML = `
-                    <img src="${item.thumb}" loading="lazy" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-1000">
+                    <img src="${item.thumb}" ${styleAttr} loading="lazy" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-1000">
                     <div class="absolute inset-0 bg-stone-900/20 group-hover:bg-transparent transition-colors duration-700"></div>
                     ${captionHtml}
                 `;
