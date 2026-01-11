@@ -159,7 +159,7 @@
             scroll-padding-top: 100px;
         }
 
-        #video-modal {
+        #video-modal, #bio-modal {
             transition: opacity 0.7s ease;
         }
 
@@ -186,7 +186,7 @@
     <div class="texture-overlay"></div>
 
     <!-- VIDEO MODAL -->
-    <div id="video-modal" class="fixed inset-0 z-[100] bg-stone-900/98 backdrop-blur-md hidden flex flex-col items-center justify-center p-4 opacity-0">
+    <div id="video-modal" class="fixed inset-0 z-[100] bg-stone-900/98 backdrop-blur-md hidden flex flex-col items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-700">
         <button id="close-modal-btn" class="absolute top-6 right-6 z-[110] text-stone-400 hover:text-white transition-colors group flex items-center gap-2">
             <span class="text-[10px] uppercase tracking-widest hidden md:block opacity-0 group-hover:opacity-100 transition-opacity" data-i18n="close">Close</span>
             <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
@@ -198,6 +198,30 @@
         <!-- Caption Area for Context -->
         <div id="modal-caption" class="text-stone-400 font-serif italic text-lg text-center max-w-2xl"></div>
     </div>
+
+    <!-- BIO MODAL -->
+    <div id="bio-modal" class="fixed inset-0 z-[100] bg-stone-50/98 backdrop-blur-md hidden flex flex-col items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-700">
+        <button id="close-bio-btn" class="absolute top-6 right-6 z-[110] text-stone-600 hover:text-stone-900 transition-colors group flex items-center gap-2">
+            <span class="text-[10px] uppercase tracking-widest hidden md:block opacity-0 group-hover:opacity-100 transition-opacity" data-i18n="close">Close</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+        <div class="w-full max-w-3xl bg-white shadow-2xl relative overflow-y-auto max-h-[80vh] p-12 border border-stone-200">
+             <h3 class="text-3xl font-serif text-stone-900 mb-8">Chiao-Hua Chang</h3>
+             <div class="text-lg font-light text-stone-600 leading-relaxed space-y-6">
+                <p>
+                    <strong>MA Ethno-Musicology / Erhu Soloist, teacher</strong>
+                </p>
+                <p>
+                    Born in Taiwan, Ms. Chang has been living in Vienna since 2013 as a freelance musician and Erhu teacher. She not only plays traditional music but also tries to build a cultural bridge by combining Eastern and Western cultures musically. To date she has played with many local and international musicians and ensembles in many countries.
+                </p>
+                <p>
+                    Here is a small selection: She took part in the piece "Don Quijote" at the Haag Summer Theater, performed with Hans Tschiritsch and the accordionist Otto Lechner in the Porgy and Bess jazz club. She is currently involved in the "CULTURAL CONCEPT" project with Przemysław Strączek, in the reading "Der West-Östliche Artmann", the Orchestra of Cultures under Adrian Werum and "Colores" by Eldis La Rosa. She has also participated in various international free improvisations festivals.
+                </p>
+                <p>
+                    Since 2000, she can look back on several years of pedagogical experience through Erhu teaching. 2001 Bachelor's degree in the Erhu instrumental subject from Shih-Chien University. In 2008 she completed her master's degree at the "Tainan National University of the Arts" with a master's thesis on the indigenous people of the “Tsou".
+                </p>
+             </div>
+        </div>
     </div>
 
     <!-- Navigation -->
@@ -310,6 +334,8 @@
                         Her diverse portfolio spans from the Orchestra of Cultures to experimental jazz at Porgy & Bess. She challenges the boundaries of the Erhu, proving it is a living, breathing voice in contemporary music.
                     </p>
                 </div>
+                
+                <button onclick="openBioModal()" class="text-[10px] uppercase tracking-widest text-stone-900 border-b border-stone-900 pb-1 hover:text-stone-500 hover:border-stone-500 transition-colors" data-i18n="read_more">Read More</button>
 
                 <div class="grid grid-cols-2 gap-8 pt-8 border-t border-stone-300/50">
                     <div>
@@ -761,7 +787,8 @@
                 inquiries: "Inquiries",
                 management: "Management",
                 follow: "Follow",
-                back_to_top: "Back to Top"
+                back_to_top: "Back to Top",
+                read_more: "Read More"
             },
             de: {
                 close: "Schließen",
@@ -825,71 +852,73 @@
                 inquiries: "Anfragen",
                 management: "Management",
                 follow: "Folgen",
-                back_to_top: "Nach Oben"
+                back_to_top: "Nach Oben",
+                read_more: "Mehr lesen"
             },
             zh: {
-                close: "关闭",
-                about: "关于",
+                close: "關閉",
+                about: "關於",
                 works: "作品",
-                gallery: "画廊",
+                gallery: "畫廊",
                 live: "演出",
                 erhu: "二胡",
-                education: "教学",
-                contact: "联系",
-                menu: "菜单",
-                location: "维也纳 • 台湾",
-                hero_role: "二胡独奏家 / 人声 / 马头琴 / 教育家",
-                enter_portfolio: "进入作品集",
+                education: "教學",
+                contact: "聯繫",
+                menu: "選單",
+                location: "維也納 • 台灣",
+                hero_role: "二胡獨奏家 / 人聲 / 馬頭琴 / 教育家",
+                enter_portfolio: "進入作品集",
                 view_schedule: "查看行程",
-                biography: "简介",
-                bio_headline: "以两根弦连接大陆的共鸣。",
-                bio_body: "自2013年定居维也纳以来，张巧华在东方传统与西方创新之间创造了独特的对话。拥有民族音乐学硕士学位，她游走于古典纪律与先锋即兴之间。<br><br>她的作品涵盖了从文化管弦乐团到Porgy & Bess的实验爵士乐。她挑战二胡的界限，证明它是当代音乐中鲜活的声音。",
-                years_teaching: "多年教学经验",
-                ethnomusicology: "民族音乐学",
-                archive: "档案",
-                selected_works: "精选作品",
-                works_quote: "透过两条弦，旅行世界，体验人生。",
-                works_desc: "跨越爵士、戏剧和古典改编的合作精选。",
-                visual_archive: "视觉档案",
-                gallery_desc: "时刻、表演与记忆的集合。",
+                biography: "簡介",
+                bio_headline: "以兩根弦連接大陸的共鳴。",
+                bio_body: "自2013年定居維也納以來，張巧華在東方傳統與西方創新之間創造了獨特的對話。擁有民族音樂學碩士學位，她遊走於古典紀律與先鋒即興之間。<br><br>她的作品涵蓋了從文化管弦樂團到Porgy & Bess的實驗爵士樂。她挑戰二胡的界限，證明它是當代音樂中鮮活的聲音。",
+                years_teaching: "多年教學經驗",
+                ethnomusicology: "民族音樂學",
+                archive: "檔案",
+                selected_works: "精選作品",
+                works_quote: "透過兩條弦，旅行世界，體驗人生。",
+                works_desc: "跨越爵士、戲劇和古典改編的合作精選。",
+                visual_archive: "視覺檔案",
+                gallery_desc: "時刻、表演與記憶的集合。",
                 upcoming_performances: "近期演出",
-                live_desc: "探索即将到来的演出地点。使用下方按钮查看距离。",
-                find_distance: "查找距离",
+                live_desc: "探索即將到來的演出地點。使用下方按鈕查看距離。",
+                find_distance: "搜尋距離",
                 the_erhu: "二胡",
-                spirit_structure: "精神与结构",
-                erhu_intro: "“比小提琴更具歌唱性，比大提琴更古老。一把唱出千年悲喜的胡琴。”",
-                history_label: "历史",
+                spirit_structure: "精神與結構",
+                erhu_intro: "「比小提琴更具歌唱性，比大提琴更古老。一把唱出千年悲喜的胡琴。」",
+                history_label: "歷史",
                 tang_dynasty: "唐朝",
-                history_desc: "源于千年前的中亚奚人。历经宋明两代的演变。",
-                material_label: "材质",
-                ebony_snake: "乌木与蟒皮",
-                material_desc: "琴筒蒙以蟒皮，赋予二胡独特的人声特质。",
-                sound_label: "声学",
-                vocal_timbre: "人声特质",
-                sound_desc: "弓毛在两弦之间运行，声音由内而生，形成连绵不断的音流。",
+                history_desc: "源於千年前的中亞奚人。歷經宋明兩代的演變。",
+                material_label: "材質",
+                ebony_snake: "烏木與蟒皮",
+                material_desc: "琴筒蒙以蟒皮，賦予二胡獨特的人聲特質。",
+                sound_label: "聲學",
+                vocal_timbre: "人聲特質",
+                sound_desc: "弓毛在兩弦之間運行，聲音由內而生，形成連綿不斷的音流。",
                 technique_label: "技法",
-                expressivity: "表现力",
-                technique_desc: "无指板设计允许深沉的揉弦和流畅的滑音，模仿人声的细腻。",
+                expressivity: "表現力",
+                technique_desc: "無指板設計允許深沉的揉弦和流暢的滑音，模仿人聲的細膩。",
                 master_erhu: "掌握二胡",
-                edu_desc: "无论您是初学者还是寻求扩展音色的专业音乐家，巧华都提供结构化且灵活的课程。",
-                edu_quote: "“二胡是最具歌唱性的乐器；它唱出你无法言说的心声。”",
-                meet_instructor: "认识导师",
-                level_1: "第一级",
-                level_1_title: "基础",
-                level_1_desc: "姿势、简谱、空弦和基础音阶，适合零基础学者。建立坚实的基础。",
-                level_2: "第二级",
+                edu_desc: "無論您是初學者還是尋求擴展音色的專業音樂家，巧華都提供結構化且靈活的課程。",
+                edu_quote: "「二胡是最具歌唱性的樂器；它唱出你無法言說的心聲。」",
+                meet_instructor: "認識導師",
+                level_1: "第一級",
+                level_1_title: "基礎",
+                level_1_desc: "姿勢、簡譜、空弦和基礎音階，適合零基礎學者。建立堅實的基礎。",
+                level_2: "第二級",
                 level_2_title: "技巧",
-                level_2_desc: "揉弦、换把、滑音和传统民歌 repertoire。雕琢您的声音。",
-                level_3: "第三级",
+                level_2_desc: "揉弦、換把、滑音和傳統民歌 repertoire。雕琢您的聲音。",
+                level_3: "第三級",
                 level_3_title: "演奏",
-                level_3_desc: "高级运弓、当代即兴和舞台准备。掌握艺术。",
-                inquire: "咨询",
-                booking_title: "预约课程",
+                level_3_desc: "高級運弓、當代即興和舞台準備。掌握藝術。",
+                inquire: "諮詢",
+                booking_title: "預約課程",
                 lets_play: "合作演出",
-                inquiries: "咨询",
+                inquiries: "諮詢",
                 management: "管理",
-                follow: "关注",
-                back_to_top: "回到顶部"
+                follow: "關注",
+                back_to_top: "回到頂部",
+                read_more: "閱讀更多"
             }
         };
 
@@ -941,13 +970,16 @@
         ];
 
         // Existing YouTube Data
-        const youtubeIds = [
-            'S0vfVuYH_3Q', 'QNVAUg52Las', 'CZpTLy7Ee-4', 'fr0FB7OPbhE', 
-            'YN7oQ3Z7eXE', 'wH0le3tV3KE', 'nWNNEHPSyWs', 'NG3_-ZmVTQc'
-        ];
+        // Filtered out to avoid duplicates with Selected Works section
+        const youtubeIds = [];
 
         // Existing Image Data
         const imageUrls = [
+            {
+                src: 'https://i.imgur.com/ibq2EmY.jpeg',
+                title: 'Strączek & Chang',
+                desc: 'Guitar & Morin khuur • 01/06/21 • Stara Łaźnia Moszczenica'
+            },
             'https://i.imgur.com/Dy3QQIv.jpeg',
             'https://i.imgur.com/7aamYM6.jpeg',
             'https://i.imgur.com/N8Ql1Qr.jpeg',
@@ -973,8 +1005,12 @@
         });
 
         // Add Images
-        imageUrls.forEach(url => {
-            items.push({ type: 'image', src: url, thumb: url });
+        imageUrls.forEach(img => {
+            if (typeof img === 'string') {
+                items.push({ type: 'image', src: img, thumb: img });
+            } else {
+                items.push({ type: 'image', src: img.src, thumb: img.src, title: img.title, desc: img.desc });
+            }
         });
 
         // Shuffle
@@ -1004,23 +1040,29 @@
                 `;
                 el.onclick = () => openVideo('mp4', item.src, item.title, item.desc);
             } else {
-                // REMOVED GRAYSCALE FILTER HERE for luxury look
+                // Image handling with optional caption overlay
+                let captionHtml = '';
+                if (item.title || item.desc) {
+                    captionHtml = `
+                        <div class="absolute inset-0 flex flex-col justify-end p-6 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+                            <p class="text-white font-serif text-lg leading-tight mb-1 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-100">${item.title || ''}</p>
+                            <p class="text-stone-300 text-[10px] uppercase tracking-widest transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-200">${item.desc || ''}</p>
+                        </div>
+                    `;
+                }
+
                 el.innerHTML = `
                     <img src="${item.thumb}" loading="lazy" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-1000">
                     <div class="absolute inset-0 bg-stone-900/20 group-hover:bg-transparent transition-colors duration-700"></div>
+                    ${captionHtml}
                 `;
             }
             galleryContainer.appendChild(el);
         });
 
         // --- CONCERT DATA ---
-        const concerts = [
-            { date: 'March 19, 2026', venue: 'Sargfabrik', address: 'Goldschlagstraße 169, 1140 Wien', title: 'DUSHA CONNECTION - Outside', details: 'A Jazzy Tribute to Erik S • 19:30', coords: [48.1962, 16.3124] },
-            { date: 'Oct 24, 2026', venue: 'Konzerthaus Vienna', address: 'Lothringerstraße 20, 1030 Wien', title: 'With Przemysław Strączek', details: 'Berio-Saal • 19:30', coords: [48.2008, 16.3770] },
-            { date: 'Nov 12, 2026', venue: 'Porgy & Bess', address: 'Riemergasse 11, 1010 Wien', title: 'Jazz Improvisation Night', details: 'Experimental Series • 20:30', coords: [48.2058, 16.3756] },
-            { date: 'Dec 05, 2026', venue: 'Musikverein Graz', address: 'Opernring 2, 8010 Graz', title: 'The Orchestra of Cultures', details: 'Großer Saal • 19:00', coords: [47.0694, 15.4418] },
-            { date: 'Jan 20, 2027', venue: 'National Concert Hall', address: 'No. 21-1, Zhongshan S Rd, Taipei City', title: 'Solo Recital', details: 'Main Auditorium • 19:30', coords: [25.0357, 121.5197] }
-        ];
+        // Cleared concerts as requested, keeping structure ready for future data
+        const concerts = [];
 
         // --- MAP LOGIC ---
         const map = L.map('concert-map', { center: [48.2082, 16.3738], zoom: 12, scrollWheelZoom: false, zoomControl: false });
@@ -1030,34 +1072,39 @@
         L.control.zoom({ position: 'bottomright' }).addTo(map);
 
         const concertList = document.getElementById('concert-list');
-        concerts.forEach((c, index) => {
-            const marker = L.marker(c.coords).addTo(map);
-            marker.bindPopup(`<b>${c.venue}</b><br>${c.date}<br>${c.title}`);
+        
+        if (concerts.length === 0) {
+            concertList.innerHTML = '<div class="py-8 text-center text-stone-500 italic">No upcoming performances scheduled at the moment.</div>';
+        } else {
+            concerts.forEach((c, index) => {
+                const marker = L.marker(c.coords).addTo(map);
+                marker.bindPopup(`<b>${c.venue}</b><br>${c.date}<br>${c.title}`);
 
-            const item = document.createElement('div');
-            item.className = "group grid grid-cols-1 md:grid-cols-12 py-8 border-b border-stone-300 hover:bg-stone-200/50 transition-colors duration-700 items-start reveal";
-            item.innerHTML = `
-                <div class="md:col-span-2 text-xs uppercase tracking-widest text-stone-500 mb-2 md:mb-0">${c.date}</div>
-                <div class="md:col-span-4">
-                    <div class="text-2xl font-serif text-stone-900 group-hover:italic transition-all duration-500 leading-tight">${c.venue}</div>
-                    <div class="text-xs text-stone-500 mt-1">${c.address}</div>
-                </div>
-                <div class="md:col-span-4 mt-4 md:mt-0">
-                    <div class="text-lg font-serif text-stone-800">${c.title}</div>
-                    <div class="text-sm text-stone-600 font-light italic">${c.details}</div>
-                </div>
-                <div class="md:col-span-2 flex flex-col items-end justify-center mt-4 md:mt-0 gap-2">
-                    <a href="https://www.google.com/maps/dir/?api=1&destination=${c.coords[0]},${c.coords[1]}" target="_blank" class="text-[10px] uppercase tracking-widest text-stone-600 hover:text-stone-900 border-b border-stone-300 hover:border-stone-900 transition-all duration-500 flex items-center gap-1">
-                        <span data-i18n="find_distance">Get Directions</span> <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
-                    </a>
-                    <span class="distance-display text-[10px] font-mono text-stone-400 opacity-0 transition-opacity duration-700" id="dist-${index}"></span>
-                </div>
-            `;
-            item.addEventListener('mouseenter', () => marker.openPopup());
-            concertList.appendChild(item);
-        });
-        const group = new L.featureGroup(concerts.map(c => L.marker(c.coords)));
-        map.fitBounds(group.getBounds().pad(0.1));
+                const item = document.createElement('div');
+                item.className = "group grid grid-cols-1 md:grid-cols-12 py-8 border-b border-stone-300 hover:bg-stone-200/50 transition-colors duration-700 items-start reveal";
+                item.innerHTML = `
+                    <div class="md:col-span-2 text-xs uppercase tracking-widest text-stone-500 mb-2 md:mb-0">${c.date}</div>
+                    <div class="md:col-span-4">
+                        <div class="text-2xl font-serif text-stone-900 group-hover:italic transition-all duration-500 leading-tight">${c.venue}</div>
+                        <div class="text-xs text-stone-500 mt-1">${c.address}</div>
+                    </div>
+                    <div class="md:col-span-4 mt-4 md:mt-0">
+                        <div class="text-lg font-serif text-stone-800">${c.title}</div>
+                        <div class="text-sm text-stone-600 font-light italic">${c.details}</div>
+                    </div>
+                    <div class="md:col-span-2 flex flex-col items-end justify-center mt-4 md:mt-0 gap-2">
+                        <a href="https://www.google.com/maps/dir/?api=1&destination=${c.coords[0]},${c.coords[1]}" target="_blank" class="text-[10px] uppercase tracking-widest text-stone-600 hover:text-stone-900 border-b border-stone-300 hover:border-stone-900 transition-all duration-500 flex items-center gap-1">
+                            <span data-i18n="find_distance">Get Directions</span> <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                        </a>
+                        <span class="distance-display text-[10px] font-mono text-stone-400 opacity-0 transition-opacity duration-700" id="dist-${index}"></span>
+                    </div>
+                `;
+                item.addEventListener('mouseenter', () => marker.openPopup());
+                concertList.appendChild(item);
+            });
+            const group = new L.featureGroup(concerts.map(c => L.marker(c.coords)));
+            map.fitBounds(group.getBounds().pad(0.1));
+        }
 
         function calculateDistances() {
             const status = document.getElementById('geo-status');
@@ -1110,13 +1157,16 @@
 
         // --- UPDATED VIDEO PLAYER LOGIC ---
         const modal = document.getElementById('video-modal');
+        const bioModal = document.getElementById('bio-modal');
         const iframe = document.getElementById('youtube-frame');
         const mp4Player = document.getElementById('mp4-player');
         const caption = document.getElementById('modal-caption');
         const closeModalBtn = document.getElementById('close-modal-btn');
+        const closeBioBtn = document.getElementById('close-bio-btn');
 
         function openVideo(type, src, title, desc) {
             modal.classList.remove('hidden');
+            modal.classList.remove('pointer-events-none'); // Enable interactions
             
             // Reset players
             iframe.classList.add('hidden');
@@ -1139,9 +1189,6 @@
                 }
             } else {
                 // If the type is just a string (like from the instructor video), treat it as an ID or file
-                // Here we assume it's an imgur mp4 if it ends in mp4, or youtube ID otherwise. 
-                // For the instructor video specifically, we passed 'rxZoz5K' which is imgur ID.
-                // Let's handle the specific case for the instructor video click
                 if(type === 'rxZoz5K') {
                     mp4Player.classList.remove('hidden');
                     mp4Player.src = "https://i.imgur.com/rxZoz5K.mp4";
@@ -1161,6 +1208,7 @@
             modal.classList.add('opacity-0');
             setTimeout(() => {
                 modal.classList.add('hidden');
+                modal.classList.add('pointer-events-none');
                 iframe.src = '';
                 mp4Player.pause();
                 mp4Player.src = '';
@@ -1168,9 +1216,33 @@
             }, 700);
         }
 
+        function openBioModal() {
+            bioModal.classList.remove('hidden');
+            bioModal.classList.remove('pointer-events-none');
+            setTimeout(() => { bioModal.classList.remove('opacity-0'); }, 50);
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeBioModal() {
+            bioModal.classList.add('opacity-0');
+            setTimeout(() => {
+                bioModal.classList.add('hidden');
+                bioModal.classList.add('pointer-events-none');
+                document.body.style.overflow = '';
+            }, 700);
+        }
+
         closeModalBtn.addEventListener('click', closeVideo);
+        closeBioBtn.addEventListener('click', closeBioModal);
         modal.addEventListener('click', (e) => { if (e.target === modal) closeVideo(); });
-        document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !modal.classList.contains('hidden')) closeVideo(); });
+        bioModal.addEventListener('click', (e) => { if (e.target === bioModal) closeBioModal(); });
+        
+        document.addEventListener('keydown', (e) => { 
+            if (e.key === 'Escape') {
+                if (!modal.classList.contains('hidden')) closeVideo();
+                if (!bioModal.classList.contains('hidden')) closeBioModal();
+            }
+        });
 
         // --- SCROLL REVEAL ---
         const observer = new IntersectionObserver((entries, observer) => {
